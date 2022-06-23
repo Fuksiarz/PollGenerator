@@ -1,0 +1,67 @@
+.poll{
+    width:50%;
+    padding: 0%;
+    margin-left:auto;
+    margin-right:auto;
+    justify-content: center;
+    color: #f6e8e8;
+    text-align: center;
+    border-radius: 5px;
+    border: 5px solid #e33434;
+    background-color: #b62323;
+}
+h2, .questionLabel {
+    font-size:26px;
+
+}
+h3, .enterYourAnswers{
+    font-size: 18px;
+}
+.inputQuestion{
+    width:50%;
+    margin-bottom: 10px;
+    background-color: #f1a175;
+    border-radius: 7px;
+}
+
+.answers input{
+    background-color: #f1a175;
+}
+.answers button{
+    background-color: #af7352;
+}
+input:focus{
+    background-color: #ea7f44;
+}
+input{
+    color: #170804;
+
+    height:25px;
+    border:red solid 1px;
+}
+.form-field{
+    text-align: center;
+}
+.forQuestion{
+    justify-content: center;
+    text-align: center;
+    display:block;
+}
+#remove-btn{
+    background-color: #171515;
+    color:white;
+}
+#add-btn{
+    background-color: #708d05;
+    color: #f6e8e8;
+    height:30px;
+}
+#submit-btn{
+    background-color: #708d05;
+    color: #f6e8e8;
+    margin-bottom:8px;
+    margin-top:8px;
+    height:30px;
+    width:150px;
+
+}
