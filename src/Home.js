@@ -1,24 +1,18 @@
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import {getDocs} from "firebase/firestore"
-import {collection} from "firebase/firestore";
+import {collection, deleteDoc, doc} from "firebase/firestore";
 import {firestore} from "./firebase";
 import Parser from "./Parser";
+import "./Home.css"
+import {Link,useParams} from "react-router-dom";
 
 function Home() {
 
     const [postList, setPostList] = useState([]);
-    const [postList2, setPostList2] = useState();
-    const [postList3, setPostList3] = useState([]);
-    const [question, setQuestion] = useState();
-    const [answer1, setAnswer1] = useState();
-    const [answer2, setAnswer2] = useState();
-    const [answer3, setAnswer3] = useState();
-    const [answer4, setAnswer4] = useState();
+
     const ref = collection(firestore, "polls");
-    const ObjectKeys = (postList) => {
-        return Object.keys(postList);
-    }
+
     useEffect(() => {
         const getPosts = async () => {
             const data = await getDocs(ref);
@@ -29,49 +23,63 @@ function Home() {
         }
 
         getPosts()
-        // cos();
-    })
-    // const cos=()=>{
-    // return(
-    //
-    //     <div>{postList.map((post)=> {
-    //         setQuestion(post.question);
-    //         const answer = JSON.stringify(post.answer[0]);
-    //         console.log(answer);
-    //         let answerText=JSON.parse(answer);
-    //         console.log(answerText);
-    //         // setAnswer1(answer)
-    //         // setAnswer1(JSON.parse(JSON.stringify(post.answer[0])));
-    //
-    //
-    //         // setAnswer1(JSON.parse(answer2))
-    //         // setAnswer2(post.answer[1])
-    //         // setAnswer3(post.answer[2])
-    //         // setAnswer4(post.answer[3])
-    // })};
-    //
-    //         </div>
-    // )
-    // }
+        // console.log({postList})
+    }, [])
 
+
+    const deletePost = async (id) => {
+
+        const postDoc = doc(firestore, "polls", id);
+        await deleteDoc(postDoc);
+        window.location.reload();
+    }
+
+    //
     return (
 
-        <div>
+        <div className="homeContainer">
             {postList.map((post, index) => {
 
 
                 return (
-                    <div key={index}>
-                        <h1>
-                            {post.question}
-                        </h1>
-                        {post.answer.map((data,index)=>{
-                            return(
-                                <li key={index}>
-                                    {data.answer}
-                                </li>
-                                    )
-                        })}
+                    <div className="fromBase" key={post.id}>
+
+                        <div className="pollInfo">
+                            <div>
+                                <h1 className="question">
+                                    {post.question}
+
+
+                                </h1>
+                            </div>
+                            {post.answer.map((data, index) => {
+
+                                return (
+                                    <div className="homeAnswers">
+                                        <div key={index}>
+                                            <button className="answer-btn"><h2> {data.answer}</h2></button>
+
+                                        </div>
+                                    </div>
+                                )
+                            })}
+
+                        </div>
+                        <div className="homeSecondDyv">
+                            <div className="homePostSet">
+                                <div className="homeDelete-btnDiv">
+                                    <button className="homeDelete-btn" onClick={() => deletePost(post.id)}>delete
+                                    </button>
+                                </div>
+                                <div className="homeEdit-btnDiv">
+                                    <button className="homeEdit-btn">edit</button>
+                                </div>
+                            </div>
+                            <div className="homeState">
+                                <button className="homeState-btn"><Link to="/update/:id" state={post.id}>edit</Link></button>
+
+                            </div>
+                        </div>
                     </div>
                 )
             })}

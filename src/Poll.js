@@ -2,31 +2,41 @@ import React, {useState} from 'react';
 import {addDoc, collection} from "firebase/firestore";
 import {firestore} from "./firebase";
 import "./Poll.css"
+import {wait} from "@testing-library/user-event/dist/utils";
 
 function Poll() {
 
     const [serviceList, setServiceList] = useState([{answer: ""}]);
     const [question, setQuestion] = useState("");
     const ref = collection(firestore, "polls");
-    const handleSave = async (e) => {
-
-        console.log(serviceList);
-        try {
-            addDoc(ref, data)
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    let data = {
+    const data = {
         question: question,
         answer: serviceList
     };
+    const handleSave = async () => {
+
+
+        try {
+            await addDoc(ref, {
+                question: question,
+                answer: serviceList
+            })
+
+
+        } catch (e) {
+            console.log(e.message("something went wrong"));
+
+        }
+    }
 
 
     const handleServiceAdd = () => {
 
         setServiceList([...serviceList, {answer: ""}])
+
+
+    }
+    const clearServiceList= () =>{
 
 
     }
@@ -58,7 +68,7 @@ function Poll() {
                         />
                     </div>
                 </div>
-                <label className="enterAnswer"><h3>Enter your answers:</h3> </label>
+                <label className="enterAnswer"><h3>Enter your answers:</h3></label>
                 {serviceList.map((singleService, index) => (
                     <div className="answers" key={index}>
                         <div className="first-division">
@@ -74,15 +84,23 @@ function Poll() {
                         </div>
                         <div className="second-division">
                             {serviceList.length > 1 && (
-                                <button  onClick={() => handleServiceRemove(index)} type="button" id="remove-btn">
+                                <button onClick={() => handleServiceRemove(index)} type="button" id="remove-btn">
                                     <span>Remove</span>
                                 </button>
                             )}
                         </div>
                         {serviceList.length - 1 === index && serviceList.length > 1 && question != null && (
-                            <button id="submit-btn" onClick={handleSave}>
+                            <div>
+                            <div><button id="submit-btn" onClick={handleSave}>
                                 submit
                             </button>
+                            </div>
+                            <div>
+                                <button id="submit-btn" onClick={clearServiceList}>
+                                    clear
+                                </button>
+                            </div>
+                            </div>
                         )}
                     </div>
 

@@ -1,0 +1,116 @@
+.homeContainer{
+
+    width:75%;
+    color: #f6e8e8;
+    margin-left:auto;
+    margin-right:auto;
+
+    text-align: center;
+    border: 5px solid #e33434;
+    background-color: #b62323;
+}
+.fromBase{
+    width:100%;
+    display:flex;
+
+    border: 1px solid #d05757;
+}
+.pollInfo{
+    width:100%;
+    display:inline-block;
+    background-color: #b62323;
+    justify-content: center;
+
+}
+.homeSecondDyv{
+    display: block;
+    width:25%;
+    margin-top:7px;
+    margin-right:7px;
+    margin-bottom:7px;
+}
+.homePostSet{
+
+    display:flex;
+    width:100%;
+    height:85%;
+
+
+}
+.homeEdit-btnDiv{
+    padding: 7px;
+    width:50%;
+    height:30%;
+
+
+}
+.homeDelete-btnDiv{
+    padding: 7px;
+    width:50%;
+    height:30%;
+    top:100%;
+
+
+}
+
+.homeState{
+
+    width:100%;
+    height:15%;
+
+
+}
+.homeState-btn{
+    background-color: #708d05;
+    color:white;
+    width:100%;
+    height:100%;
+
+}
+
+.homeDelete-btn{
+    background-color: #171515;
+    color:white;
+    width:100%;
+    height:100%;
+}
+.homeEdit-btn{
+    background-color: #708d05;
+
+    color:white;
+    width:100%;
+    height:100%;
+}
+.homeAnswers{
+
+
+    display:inline-block;
+
+    margin-left:auto;
+    margin-right:auto;
+
+
+}
+.homeAnswers:last-child{
+
+
+    padding:20px
+
+
+}
+.answer-btn{
+    background-color: #f1a175;
+    border:red solid 1px;
+    height:100px;
+    width:220px;
+
+}
+.answer-btn:hover{
+
+    background-color: #e78140;
+
+
+}
+/*.answers-btn{*/
+/*    */
+/*}*/

@@ -2,8 +2,7 @@
 import './App.css';
 import Poll from "./Poll";
 import React, {useState} from "react";
-import Home from "./Home"
-
+import Home from "./Home";
 import {
     BrowserRouter as Router,
     Routes,
@@ -11,6 +10,7 @@ import {
     Link
 } from "react-router-dom";
 import Questions from "./Questions";
+import UpdatePoll from "./UpdatePoll";
 
 
 
@@ -23,7 +23,7 @@ function App() {
                 <Link to="/blogs">create poll</Link>
                 </div >
                 <div className="navDiv">
-                    <Link to="/contact">whatever</Link>
+                    <Link to="/update">update</Link>
                 </div>
                 <div className="navDiv">
                 <Link to="/">home</Link>
@@ -37,7 +37,8 @@ function App() {
 
                 <Route path="/blogs" element={<Poll />} />
                 <Route path="/contact" element={<Questions />} />
-
+                <Route path="/update" element={<UpdatePoll/>} />
+                <Route path="/update/:id" element={<UpdatePoll/>} />
 
             </Routes>
         </Router>
