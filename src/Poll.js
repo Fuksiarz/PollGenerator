@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {addDoc, collection} from "firebase/firestore";
+import {addDoc, collection, updateDoc} from "firebase/firestore";
 import {firestore} from "./firebase";
 import "./Poll.css"
 import {wait} from "@testing-library/user-event/dist/utils";
@@ -16,17 +16,21 @@ function Poll() {
     const handleSave = async () => {
 
 
-        try {
-            await addDoc(ref, {
-                question: question,
-                answer: serviceList
+
+        await addDoc(ref, {
+            question: question,
+            answer: serviceList
+        })
+            .then(()=>{
+                alert("data added succesfully");
+            })
+            .catch((error)=>{
+
+                alert("something went wrong: "+error);
             })
 
 
-        } catch (e) {
-            console.log(e.message("something went wrong"));
 
-        }
     }
 
 

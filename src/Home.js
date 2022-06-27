@@ -76,7 +76,8 @@ function Home() {
                                 </div>
                             </div>
                             <div className="homeState">
-                                <button className="homeState-btn"><Link to="/update/:id" state={post.id}>edit</Link></button>
+                                <button className="homeState-btn"><Link to="/update/:id" state={{id:post.id,we:post.answer}}>edit</Link></button>
+
 
                             </div>
                         </div>

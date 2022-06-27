@@ -1,6 +1,8 @@
-import React, {useEffect, useState} from 'react';
 
-import {addDoc, collection, getDocs, doc} from "firebase/firestore";
+
+import React, {useEffect, useState} from 'react';
+import { Navigate } from "react-router-dom";
+import {addDoc, collection, getDocs, doc,updateDoc} from "firebase/firestore";
 import {firestore} from "./firebase";
 import {Link, useLocation} from "react-router-dom";
 
@@ -10,9 +12,13 @@ function UpdatePoll() {
     const [serviceListData, setServiceListData] = useState([]);
     const [serviceList, setServiceList] = useState([{answer: ""}]);
     const [question, setQuestion] = useState("");
+
     const [list, setList] = useState([]);
     const location = useLocation();
-    const params = location.state;
+
+    const params = location.state.id;
+    const[lista,setlista]=useState([{answer:""}])
+
     const ref = collection(firestore, "polls");
 
 
@@ -27,7 +33,7 @@ function UpdatePoll() {
             const data = await getDocs(ref);
 
             setServiceListData(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
-
+            setServiceList(location.state.we)
 
         }
 
@@ -37,6 +43,26 @@ function UpdatePoll() {
 
     }, [])
 
+    const handleSave = async () => {
+
+
+
+            await updateDoc(ref, {
+                question: question,
+                answer: serviceList
+            })
+                .then(()=>{
+                    alert("data updated succesfully");
+                })
+                .catch((error)=>{
+
+                    alert("something went wrong: "+error);
+                }).then(<Navigate to="/home"></Navigate>)
+
+
+
+
+    }
 
 
 
@@ -68,7 +94,7 @@ function UpdatePoll() {
             {serviceListData.map((post, index) => {
 
                 if (post.id === params) {
-
+                    console.log(serviceList);
                     return (
 
                         <form className="poll" autoComplete="off">
@@ -85,7 +111,7 @@ function UpdatePoll() {
                                     </div>
                                 </div>
                                 <label className="enterAnswer"><h3>Enter your answers:</h3></label>
-                                {post.answer.map((singleService, index) => {
+                                {serviceList.map((singleService, index) => {
 
 
 
@@ -114,8 +140,7 @@ function UpdatePoll() {
                                                     )}
                                                 </div>
                                                 {serviceList.length - 1 === index && serviceList.length > 1 && question != null && (
-                                                    <button id="submit-btn">
-                                                        submit
+                                                    <button id="submit-btn"onClick={handleSave()}>update
                                                     </button>
                                                 )}
                                             </div>

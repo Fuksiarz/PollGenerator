@@ -13,7 +13,7 @@ function Update() {
     const [question, setQuestion] = useState("");
     const [list, setList]=useState([]);
     const location=useLocation();
-    const params= location.state;
+    const params= location.state.id;
     const ref = collection(firestore, "polls");
 
 
