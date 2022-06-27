@@ -3,6 +3,8 @@ import './App.css';
 import Poll from "./Poll";
 import React, {useState} from "react";
 import Home from "./Home";
+
+
 import {
     BrowserRouter as Router,
     Routes,
@@ -11,6 +13,7 @@ import {
 } from "react-router-dom";
 import Questions from "./Questions";
 import UpdatePoll from "./UpdatePoll";
+import Vote from "./Vote";
 
 
 
@@ -20,10 +23,10 @@ function App() {
         <Router>
             <nav className="nav">
                 <div className="navDiv">
-                <Link to="/blogs">create poll</Link>
+                <Link to="/createPoll">create poll</Link>
                 </div >
                 <div className="navDiv">
-                    <Link to="/update">update</Link>
+                    <Link to="/update:id">update</Link>
                 </div>
                 <div className="navDiv">
                 <Link to="/">home</Link>
@@ -35,11 +38,11 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home/>}/>
 
-                <Route path="/blogs" element={<Poll />} />
+                <Route path="/createPoll" element={<Poll />} />
                 <Route path="/contact" element={<Questions />} />
-                <Route path="/update" element={<UpdatePoll/>} />
                 <Route path="/update/:id" element={<UpdatePoll/>} />
-
+                <Route path="/update/:id" element={<UpdatePoll/>} />
+                <Route path="/vote/:id" element={<Vote/>} />
             </Routes>
         </Router>
 
@@ -48,7 +51,3 @@ function App() {
 }
 
 export default App;
-
-const Layout = () =>{
-    return(<h1>siema</h1>);
-}

@@ -1,6 +1,5 @@
 .poll{
     width:50%;
-    padding: 0%;
     margin-left:auto;
     margin-right:auto;
     justify-content: center;
@@ -51,10 +50,19 @@ input{
     background-color: #171515;
     color:white;
 }
+#remove-btn:hover{
+    background-color: #171616;
+    color: #9d9999;
+}
 #add-btn{
     background-color: #708d05;
     color: #f6e8e8;
     height:30px;
+}
+#add-btn:hover{
+    background-color: #90b00a;
+    color: #f6e8e8;
+
 }
 #submit-btn{
     background-color: #708d05;
@@ -63,5 +71,18 @@ input{
     margin-top:8px;
     height:30px;
     width:150px;
+
+}#submit-btn:hover{
+     background-color: #90b00a;
+     color: #f6e8e8;
+
+
+ }
+#submit-btn a{
+    text-decoration: none;
+    cursor:default;
+}
+#submit-btn a:visited{
+    color:white;
 
 }

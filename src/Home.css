@@ -22,9 +22,17 @@
     justify-content: center;
 
 }
-.homeSecondDyv{
+.homePartTwo{
+
+    height: 100%;
+    width: 25%;
     display: block;
-    width:25%;
+
+}
+.homeSecondDyv{
+
+
+
     margin-top:7px;
     margin-right:7px;
     margin-bottom:7px;
@@ -33,77 +41,140 @@
 
     display:flex;
     width:100%;
-    height:85%;
+    height:65px;
 
 
 }
 .homeEdit-btnDiv{
     padding: 7px;
     width:50%;
-    height:30%;
+    height:45px;
 
 
 }
 .homeDelete-btnDiv{
     padding: 7px;
     width:50%;
-    height:30%;
+    height:45px;
     top:100%;
 
 
+}
+.stateAnswerContainer{
+
+    margin-right:7px;
+
+    width:100%;
+
+
+
+
+}
+.pollAnswer{
+    width:100%;
+    margin-bottom: 5px;
+
+    height:80px;
+
+}
+.pollAnswer-btn{
+    width:95%;
+    height: 100%;
+
+    background-color: #708d05;
+    color:white;
+}
+.pollAnswer-btn:hover{
+
+    background-color: #9fc511;
+    color:white;
+}
+.pollAnswer-btn a:visited{
+
+
+    color:white;
 }
 
 .homeState{
 
     width:100%;
-    height:15%;
-
+    margin-top:10px;
+    /*margin-bottom: 20px;*/
 
 }
 .homeState-btn{
     background-color: #708d05;
     color:white;
-    width:100%;
+    width:95%;
     height:100%;
 
 }
 
 .homeDelete-btn{
     background-color: #171515;
+    font-size: 15px;
     color:white;
     width:100%;
     height:100%;
+}
+.homeDelete-btn:hover{
+    background-color: #0e0d0d;
+
+    color: #a68787;
+
 }
 .homeEdit-btn{
-    background-color: #708d05;
+    background-color: #e35d0a;
 
     color:white;
     width:100%;
     height:100%;
 }
-.homeAnswers{
 
+.homeEdit-btn:hover{
+    background-color: #ec3e08;
+
+    color: #9a9292;
+
+}
+
+.homeEdit-btn Link{
+
+     color:white;
+
+ }
+.homeEdit-btn a{
+    font-size: 15px;
+    color:white;
+    cursor:default;
+  }
+
+.homeEdit-btn a:visited{
+
+
+    color:white;
+
+}
+
+
+.homeAnswers{
 
     display:inline-block;
 
     margin-left:auto;
     margin-right:auto;
 
-
 }
-.homeAnswers:last-child{
 
-
-    padding:20px
-
-
-}
 .answer-btn{
     background-color: #f1a175;
     border:red solid 1px;
     height:100px;
     width:220px;
 
+}
+.answer-btn H2{
+    font-size: 18px;
 }
 .answer-btn:hover{
 

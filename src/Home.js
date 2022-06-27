@@ -1,11 +1,9 @@
 import * as React from 'react';
-import {useEffect, useState} from "react";
-import {getDocs} from "firebase/firestore"
-import {collection, deleteDoc, doc} from "firebase/firestore";
+import {useEffect, useState} from 'react';
+import {collection, deleteDoc, doc, getDocs} from "firebase/firestore"
 import {firestore} from "./firebase";
-import Parser from "./Parser";
 import "./Home.css"
-import {Link,useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 function Home() {
 
@@ -19,19 +17,17 @@ function Home() {
 
             setPostList(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
 
-
         }
 
         getPosts()
-        // console.log({postList})
-    }, [])
+    })
 
 
     const deletePost = async (id) => {
 
         const postDoc = doc(firestore, "polls", id);
         await deleteDoc(postDoc);
-        window.location.reload();
+
     }
 
     //
@@ -57,14 +53,14 @@ function Home() {
                                 return (
                                     <div className="homeAnswers">
                                         <div key={index}>
-                                            <button className="answer-btn"><h2> {data.answer}</h2></button>
-
+                                            <button className="answer-btn"><h2>{data.answer}</h2></button>
                                         </div>
                                     </div>
                                 )
                             })}
 
                         </div>
+                        <div className="homePartTwo">
                         <div className="homeSecondDyv">
                             <div className="homePostSet">
                                 <div className="homeDelete-btnDiv">
@@ -72,14 +68,28 @@ function Home() {
                                     </button>
                                 </div>
                                 <div className="homeEdit-btnDiv">
-                                    <button className="homeEdit-btn">edit</button>
+                                    <button className="homeEdit-btn"><Link to="/update/:id" state={{
+                                        id: post.id,
+                                        answers: post.answer,
+                                        question: post.question
+                                    }}>edit</Link></button>
+
                                 </div>
                             </div>
-                            <div className="homeState">
-                                <button className="homeState-btn"><Link to="/update/:id" state={{id:post.id,we:post.answer}}>edit</Link></button>
+                            <div className="stateAnswerContainer">
+                                <div className="pollAnswer">
+                                    <button className="pollAnswer-btn"><Link to="/vote/:id" state={{
+                                        id: post.id,
+                                        answers: post.answer,
+                                        question: post.question
+                                    }}><h1>Answer!</h1></Link></button>
+                                </div>
+                                <div className="homeState">
+                                    <button className="homeState-btn">OPEN</button>
 
-
+                                </div>
                             </div>
+                        </div>
                         </div>
                     </div>
                 )
@@ -88,5 +98,5 @@ function Home() {
 
 
     );
-};
+}
 export default Home;

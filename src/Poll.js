@@ -3,6 +3,7 @@ import {addDoc, collection, updateDoc} from "firebase/firestore";
 import {firestore} from "./firebase";
 import "./Poll.css"
 import {wait} from "@testing-library/user-event/dist/utils";
+import delay from "./delay";
 
 function Poll() {
 
@@ -13,24 +14,13 @@ function Poll() {
         question: question,
         answer: serviceList
     };
-    const handleSave = async () => {
 
+    const handleSave = async (e) => {
+        e.preventDefault();
 
-
-        await addDoc(ref, {
-            question: question,
-            answer: serviceList
-        })
-            .then(()=>{
-                alert("data added succesfully");
-            })
-            .catch((error)=>{
-
-                alert("something went wrong: "+error);
-            })
-
-
-
+        await addDoc(ref, data)
+        await delay(500);
+        window.location.reload();
     }
 
 
@@ -94,17 +84,13 @@ function Poll() {
                             )}
                         </div>
                         {serviceList.length - 1 === index && serviceList.length > 1 && question != null && (
-                            <div>
-                            <div><button id="submit-btn" onClick={handleSave}>
+
+                            <div><button id="submit-btn" onClick={(event)=>handleSave(event)}>
                                 submit
                             </button>
                             </div>
-                            <div>
-                                <button id="submit-btn" onClick={clearServiceList}>
-                                    clear
-                                </button>
-                            </div>
-                            </div>
+
+
                         )}
                     </div>
 
