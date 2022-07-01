@@ -2,6 +2,9 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import "./Home.css"
 import {useLocation} from "react-router-dom";
+import {addDoc, collection, doc, updateDoc} from "firebase/firestore";
+import {firestore} from "./firebase";
+import delay from "./delay";
 
 
 function Vote() {
@@ -11,13 +14,25 @@ function Vote() {
     const location = useLocation();
     const params = location.state.id;
     const [question, setQuestion] = useState(location.state.question);
+    const ref = collection(firestore, "polls");
     useEffect(() => {
 
 
             setServiceList(location.state.answers);
 
+
+
+
         }
     )
+
+    const handleSave = async (index) => {
+
+
+        await updateDoc(ref, {vote:[index]=[index]})
+        await delay(200);
+        window.location.reload();
+    }
 
 
     return (
@@ -41,7 +56,7 @@ function Vote() {
                         return (
                             <div className="homeAnswers">
                                 <div key={index}>
-                                    <button className="answer-btn"><h2>{post.answer}</h2></button>
+                                    <button onClick={()=>handleSave(index)} className="answer-btn"><h2>{post.answer}</h2></button>
                                 </div>
                             </div>
 

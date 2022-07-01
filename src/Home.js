@@ -1,33 +1,45 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
-import {collection, deleteDoc, doc, getDocs} from "firebase/firestore"
+import {useEffect, useReducer, useState} from 'react';
+import {collection, deleteDoc, doc, getDocs, updateDoc} from "firebase/firestore"
 import {firestore} from "./firebase";
 import "./Home.css"
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 function Home() {
 
     const [postList, setPostList] = useState([]);
 
     const ref = collection(firestore, "polls");
+    const [state,setState]=useState([])
 
     useEffect(() => {
         const getPosts = async () => {
             const data = await getDocs(ref);
 
             setPostList(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+            setState(data.docs.map(entry=> entry.data()));
 
         }
 
         getPosts()
-    })
 
+    })
+    const handleUpdate = async (id,open) => {
+        const userDoc = doc(firestore, "polls", id)
+
+
+        await updateDoc(userDoc, {open: !open})
+
+    }
 
     const deletePost = async (id) => {
 
         const postDoc = doc(firestore, "polls", id);
         await deleteDoc(postDoc);
 
+    }
+    const toggle=(x)=>{
+        return(!x)
     }
 
     //
@@ -42,7 +54,7 @@ function Home() {
 
                         <div className="pollInfo">
                             <div>
-                                <h1 className="question">
+                                <h1 key={index} className="question">
                                     {post.question}
 
 
@@ -78,14 +90,14 @@ function Home() {
                             </div>
                             <div className="stateAnswerContainer">
                                 <div className="pollAnswer">
-                                    <button className="pollAnswer-btn"><Link to="/vote/:id" state={{
+                                    {post.open===true&&<button className="pollAnswer-btn"><Link to="/vote/:id" state={{
                                         id: post.id,
                                         answers: post.answer,
                                         question: post.question
-                                    }}><h1>Answer!</h1></Link></button>
+                                    }}><h1>Answer!</h1></Link></button>}
                                 </div>
                                 <div className="homeState">
-                                    <button className="homeState-btn">OPEN</button>
+                                    <button onClick={()=>handleUpdate(post.id,post.open)} className="homeState-btn">{post.open ? "OPEN" : "CLOSED"}</button>
 
                                 </div>
                             </div>

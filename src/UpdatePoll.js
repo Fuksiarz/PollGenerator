@@ -4,6 +4,7 @@ import {addDoc, collection, doc, getDocs, setDoc, updateDoc} from "firebase/fire
 import {firestore} from "./firebase";
 import {Link, useLocation} from "react-router-dom";
 import * as db from "@firebase/firestore";
+import delay from "./delay";
 
 
 function UpdatePoll() {
@@ -38,14 +39,8 @@ function UpdatePoll() {
             question: question,
             answer: serviceList
         };
-        try {
-
-            updateDoc(userDoc, data).then(
-                await new Promise(r => setTimeout(r, 5000)))
-        } catch (e) {
-            postMessage(e)
-        }
-
+        await updateDoc(userDoc, data)
+        await delay(100);
     }
 
 
@@ -120,9 +115,13 @@ function UpdatePoll() {
                                                     )}
                                                 </div>
                                                 {serviceList.length - 1 === index && serviceList.length > 1 && question != null && (
-                                                    <button id="submit-btn" onClick={handleUpdate}><Link
-                                                        to="/">Update</Link>
-                                                    </button>
+                                                    <Link
+                                                        to="/">
+                                                        <div>
+                                                            <button id="submit-btn" onClick={handleUpdate}>Update
+                                                            </button>
+                                                        </div>
+                                                    </Link>
                                                 )}
                                             </div>
                                         </div>

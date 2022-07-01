@@ -9,17 +9,19 @@ function Poll() {
 
     const [serviceList, setServiceList] = useState([{answer: ""}]);
     const [question, setQuestion] = useState("");
+    const open=true;
     const ref = collection(firestore, "polls");
     const data = {
         question: question,
-        answer: serviceList
+        answer: serviceList,
+        open:open
     };
 
     const handleSave = async (e) => {
         e.preventDefault();
 
         await addDoc(ref, data)
-        await delay(500);
+        await delay(100);
         window.location.reload();
     }
 
@@ -50,7 +52,7 @@ function Poll() {
 
     return (
 
-        <form className="poll" autoComplete="off">
+        <form className="poll"  autoComplete="off">
             <div className="form-field">
                 <div className="forQuestion">
                     <div>
@@ -85,7 +87,7 @@ function Poll() {
                         </div>
                         {serviceList.length - 1 === index && serviceList.length > 1 && question != null && (
 
-                            <div><button id="submit-btn" onClick={(event)=>handleSave(event)}>
+                            <div><button id="submit-btn" onClick={(event)=>handleSave(event) }>
                                 submit
                             </button>
                             </div>
