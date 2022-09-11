@@ -7,13 +7,13 @@ import {getFirestore} from "firebase/firestore"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAvtKnQNBxo9GAU9HEukGv21MawSr7lEkg",
-    authDomain: "projekt-82127.firebaseapp.com",
-    projectId: "projekt-82127",
-    storageBucket: "projekt-82127.appspot.com",
-    messagingSenderId: "920013657016",
-    appId: "1:920013657016:web:71af4914ad37830dbb354d"
-};
+    apiKey: "AIzaSyBFikmgcL5B8ebZbU_oml9ZzRpd0K3gPIg",
+    authDomain: "pollgenerator-22d2c.firebaseapp.com",
+    projectId: "pollgenerator-22d2c",
+    storageBucket: "pollgenerator-22d2c.appspot.com",
+    messagingSenderId: "1095085510930",
+    appId: "1:1095085510930:web:dc10fa28b4b53ba86e23cb"
+  };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const firestore =getFirestore(app);
